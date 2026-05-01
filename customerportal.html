@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aasapure Dashboard</title>
+<link rel="stylesheet" href="customerportal.css">
+</head>
+<body>
+
+<div class="navbar">
+    <h2>AASAPURE</h2>
+    <div>
+        <a href="#">Home</a>
+        <a href="#" onclick="openHistory()">OrderHistory📜</a>
+        <a href="#" onclick="openProfile()">Profile</a>
+    </div>
+</div>
+
+<div class="main">
+
+<div class="sidebar">
+    <li>Dashboard</li>
+    <li onclick="openModal()">Order Milk</li>
+    <li onclick="openSubscription()">Subscription</li>
+    <li onclick="openRewards()">Rewards</li>
+    <li onclick="openCart()">Cart 🛒</li>
+</div>
+
+<div class="content">
+
+<!-- ✅ ONLY ONE GRID -->
+<div class="grid">
+
+<div class="card">
+    <h3>Order Milk</h3>
+    <p>Place new order</p>
+    <button onclick="openModal()">Order Now</button>
+</div>
+
+<div class="card">
+    <h3>Subscription</h3>
+    <p>Daily delivery setup</p>
+    <button onclick="openSubscription()">Manage</button>
+</div>
+
+<div class="card">
+    <h3>Track</h3>
+    <p>Track delivery</p>
+    <button onclick="openTrack()">Track</button>
+</div>
+
+<div class="card">
+    <h3>Rewards</h3>
+    <p>Your benefits</p>
+    <button onclick="openRewards()">View</button>
+</div>
+
+</div> <!-- grid end -->
+
+</div> <!-- content end -->
+</div> <!-- main end -->
+<!-- ORDER MODAL -->
+
+<!-- ORDER MODAL -->
+<div id="modal" class="modal">
+<div class="modal-content">
+
+<span class="close" onclick="closeModal()">&times;</span>
+
+<h3>Select Farm</h3>
+<select id="farm">
+    <option>Sharma Dairy</option>
+    <option>Verma Farm</option>
+    <option>Organic Milk Farm</option>
+</select>
+
+<h3>Order Milk</h3>
+
+<label>Milk Type</label>
+<select id="milkType">
+    <option value="50">Cow Milk (₹50/L)</option>
+    <option value="60">Buffalo Milk (₹60/L)</option>
+</select>
+
+<label>Quantity</label>
+<div class="qty-box">
+    <button onclick="decrease()">-</button>
+    <input type="number" id="qty" value="1">
+    <button onclick="increase()">+</button>
+</div>
+
+<div class="total">Total: ₹<span id="total">50</span></div>
+
+<button onclick="placeOrder()">Place Order</button>
+<button onclick="addToCart()">Add to Cart</button>
+
+</div>
+</div>
+
+<div id="cartModal" class="modal">
+<div class="modal-content">
+
+<span class="close" onclick="closeCart()">&times;</span>
+<h3>Your Cart 🛒</h3>
+
+<table border="1" style="width:100%; border-collapse:collapse; text-align:center;">
+    <thead>
+        <tr style="background:#2c3e50;color:white;">
+            <th>Farm</th>
+            <th>Milk</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="cartItems"></tbody>
+</table>
+
+</div>
+</div>
+<div id="trackModal" class="modal">
+<div class="modal-content">
+
+<span class="close" onclick="closeTrack()">&times;</span>
+<h3>Track Order 🚚</h3>
+
+<ul id="trackSteps">
+    <li>✅ Order Placed</li>
+    <li>⏳ Farmer Accepted</li>
+    <li>⏳ Picked by Delivery</li>
+    <li>⏳ Out for Delivery</li>
+    <li>⏳ Delivered</li>
+</ul>
+
+<button onclick="updateStatus()">Next Step</button>
+
+</div>
+</div>
+
+<div id="historyModal" class="modal">
+<div class="modal-content">
+
+<span class="close" onclick="closeHistory()">&times;</span>
+<h3>Order History 📜</h3>
+
+<table border="1" style="width:100%; border-collapse:collapse; text-align:center;">
+    <thead>
+        <tr style="background:#34495e;color:white;">
+            <th>Farm</th>
+            <th>Milk</th>
+            <th>Qty</th>
+            <th>Total</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody id="historyItems"></tbody>
+</table>
+
+</div>
+</div>
+
+
+<div id="subscriptionModal" class="modal">
+<div class="modal-content">
+
+<span class="close" onclick="closeSubscription()">&times;</span>
+<h3>Milk Subscription 🥛</h3>
+
+<label>Milk Type</label>
+<select id="subMilk">
+    <option>Cow Milk</option>
+    <option>Buffalo Milk</option>
+</select>
+
+<label>Quantity</label>
+<input type="number" id="subQty" value="1">
+
+<label>Start Date</label>
+<input type="date" id="subDate">
+
+<!-- ✅ MOVE HERE -->
+<label>Delivery Type</label>
+<select id="subPlan">
+    <option>Daily</option>
+    <option>Weekly</option>
+</select>
+
+<label>Time Slot</label>
+<select id="subTime">
+    <option>Morning (5AM - 8AM)</option>
+    <option>Evening (5PM - 8PM)</option>
+</select>
+
+<button onclick="saveSubscription()">Save</button>
+<button onclick="pauseSub()">Pause</button>
+<button onclick="resumeSub()">Resume</button>
+
+</div>
+</div>
+
+</div>
+</div>
+
+<div id="rewardModal" class="modal">
+<div class="modal-content">
+
+<span class="close" onclick="closeRewards()">&times;</span>
+<h3>Aasapure Milk Rewards 🥛🎁</h3>
+
+<p>Total Orders: <b id="totalOrders">0</b></p>
+
+<p>Progress</p>
+<div style="background:#ddd;height:20px;border-radius:10px;overflow:hidden;">
+    <div id="progressBar" 
+         style="height:20px;width:0%;background:green;"></div>
+</div>
+
+<p id="rewardText"></p>
+
+<button onclick="claimReward()">Claim Reward</button>
+
+</div>
+</div>
+<div id="profileModal" class="modal">
+<div class="modal-content">
+
+<span class="close" onclick="closeProfile()">&times;</span>
+<h3>My Profile 👤</h3>
+
+<p>Name: <span id="pName"></span></p>
+<p>Mobile: <span id="pMobile"></span></p>
+<p>Email: <span id="pEmail"></span></p>
+
+</div>
+</div>
+
+<script>
+
+window.onload = function () {
+    localStorage.setItem("orders", "0");
+    localStorage.removeItem("subscription");
+};
+
+if (!localStorage.getItem("orders") || isNaN(localStorage.getItem("orders"))) {
+    localStorage.setItem("orders", "0");
+}
+
+let cart = [];
+let history = [];
+
+function openModal(){
+    document.getElementById("modal").style.display="flex";
+}
+
+function closeModal(){
+    document.getElementById("modal").style.display="none";
+}
+
+function openCart(){
+    document.getElementById("cartModal").style.display="flex";
+    renderCart();
+}
+
+function closeCart(){
+    document.getElementById("cartModal").style.display="none";
+}
+
+function increase(){
+    let qty=document.getElementById("qty");
+    qty.value=parseInt(qty.value)+1;
+    updateTotal();
+}
+
+function decrease(){
+    let qty=document.getElementById("qty");
+    if(qty.value>1){
+        qty.value=parseInt(qty.value)-1;
+    }
+    updateTotal();
+}
+
+function updateTotal(){
+    let price=document.getElementById("milkType").value;
+    let qty=document.getElementById("qty").value;
+    document.getElementById("total").innerText=price*qty;
+}
+
+function placeOrder(){
+    let farm = document.getElementById("farm").value;
+    let milk = document.getElementById("milkType").options[document.getElementById("milkType").selectedIndex].text;
+    let qty = document.getElementById("qty").value;
+    let total = document.getElementById("total").innerText;
+
+    let date = new Date().toLocaleString();
+
+    // history
+    history.push({farm, milk, qty, total, date});
+
+    // ✅ SAFE ORDER COUNT
+    let orders = parseInt(localStorage.getItem("orders"));
+    if (isNaN(orders)) orders = 0;
+
+    orders++;
+    localStorage.setItem("orders", orders.toString());
+
+    alert("Milk Order Placed 🥛✅");
+}
+function openHistory(){
+    document.getElementById("historyModal").style.display="flex";
+    renderHistory();
+}
+
+function closeHistory(){
+    document.getElementById("historyModal").style.display="none";
+}
+
+
+function openSubscription(){
+    document.getElementById("subscriptionModal").style.display="flex";
+}
+
+function closeSubscription(){
+    document.getElementById("subscriptionModal").style.display="none";
+}
+
+function saveSubscription(){
+    let milk = document.getElementById("subMilk").value;
+    let qty = document.getElementById("subQty").value;
+    let date = document.getElementById("subDate").value;
+    let plan = document.getElementById("subPlan").value;
+    let time = document.getElementById("subTime").value;
+
+    let subData = {milk, qty, date, plan, time, status:"Active"};
+
+    localStorage.setItem("subscription", JSON.stringify(subData));
+
+    alert("Subscription Started ✅");
+}
+
+function pauseSub(){
+    let sub = JSON.parse(localStorage.getItem("subscription"));
+    sub.status = "Paused";
+    localStorage.setItem("subscription", JSON.stringify(sub));
+    alert("Subscription Paused ⏸️");
+}
+
+function resumeSub(){
+    let sub = JSON.parse(localStorage.getItem("subscription"));
+    sub.status = "Active";
+    localStorage.setItem("subscription", JSON.stringify(sub));
+    alert("Subscription Resumed ▶️");
+}
+
+function renderHistory(){
+    let table = document.getElementById("historyItems");
+    table.innerHTML = "";
+
+    history.forEach(item => {
+        let row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${item.farm}</td>
+            <td>${item.milk}</td>
+            <td>${item.qty} L</td>
+            <td>₹${item.total}</td>
+            <td>${item.date}</td>
+        `;
+
+        table.appendChild(row);
+    });
+}
+
+function addToCart(){
+    let farm = document.getElementById("farm").value;
+    let milk = document.getElementById("milkType").options[document.getElementById("milkType").selectedIndex].text;
+    let qty = document.getElementById("qty").value;
+    let total = document.getElementById("total").innerText;
+
+    cart.push({farm, milk, qty, total});
+
+    renderCart(); // 🔥 THIS IS THE FIX
+
+    alert("Added to Cart ✅");
+}
+
+/* 🔥 UPDATED CART FUNCTION */
+function renderCart(){
+    let table = document.getElementById("cartItems");
+    table.innerHTML = "";
+
+    cart.forEach((item, index) => {
+        let row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${item.farm}</td>
+            <td>${item.milk}</td>
+            <td>${item.qty} L</td>
+            <td>₹${item.total}</td>
+            <td>
+                <button onclick="placeSingleOrder(${index})"
+                    style="background:#27ae60;color:white;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;">
+                    Place
+                </button>
+                <button onclick="removeItem(${index})"
+                    style="background:red;color:white;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;">
+                    Remove
+                </button>
+            </td>
+        `;
+
+        table.appendChild(row);
+    });
+}
+
+
+function openTrack(){
+    document.getElementById("trackModal").style.display="flex";
+}
+
+function closeTrack(){
+    document.getElementById("trackModal").style.display="none";
+}
+
+
+
+
+let points = 0;
+
+function addPoints(){
+    points += 10;
+    document.getElementById("points").innerText = points;
+}
+/* 🔥 NEW FUNCTIONS */
+function removeItem(index){
+    let item = cart[index];
+
+    let confirmDelete = confirm(`Remove this item?\n${item.farm} - ${item.milk}`);
+
+    if(confirmDelete){
+        alert("Item Removed ❌");
+        cart.splice(index, 1);
+        renderCart();
+    }
+}
+
+
+function openProfile(){
+    document.getElementById("profileModal").style.display = "flex";
+
+    let name = localStorage.getItem("name");
+    let mobile = localStorage.getItem("mobile");
+    let email = localStorage.getItem("email");
+
+    document.getElementById("pName").innerText = name ? name : "No Data";
+    document.getElementById("pMobile").innerText = mobile ? mobile : "No Data";
+    document.getElementById("pEmail").innerText = email ? email : "No Data";
+}
+
+function closeProfile(){
+    document.getElementById("profileModal").style.display = "none";
+}
+
+function placeSingleOrder(index){
+    let item = cart[index];
+
+    let confirmOrder = confirm(`Do you want to place this order?\n${item.farm} - ${item.milk} - ${item.qty}L`);
+
+    if(confirmOrder){
+
+        let date = new Date().toLocaleString();
+
+        history.push({
+            farm: item.farm,
+            milk: item.milk,
+            qty: item.qty,
+            total: item.total,
+            date: date
+        });
+
+     let orders = parseInt(localStorage.getItem("orders"));
+if (isNaN(orders)) orders = 0;
+
+orders++;
+localStorage.setItem("orders", orders.toString());
+
+        alert(`Order Placed: ${item.farm} 🥛`);
+
+        cart.splice(index, 1);
+        renderCart();
+    }
+}
+let step = 0;
+
+function updateStatus(){
+    let steps = document.querySelectorAll("#trackSteps li");
+
+    if(step < steps.length){
+        steps[step].innerHTML = "✅ " + steps[step].innerText.replace("⏳","");
+        step++;
+    }
+}
+
+let totalOrders = 0;
+
+
+// OPEN REWARD MODAL
+function openRewards(){
+    document.getElementById("rewardModal").style.display="flex";
+
+    let totalOrders = localStorage.getItem("orders");
+
+    // ✅ FIX NaN issue
+    if(!totalOrders || isNaN(totalOrders)){
+        totalOrders = 0;
+    } else {
+        totalOrders = parseInt(totalOrders);
+    }
+
+    document.getElementById("totalOrders").innerText = totalOrders;
+
+    // progress bar
+    let percent = (totalOrders / 30) * 100;
+    if(percent > 100) percent = 100;
+
+    document.getElementById("progressBar").style.width = percent + "%";
+
+    let text = "";
+
+    if(totalOrders >= 30){
+        text = "🏆 Platinum: Free Milk Day + Priority Delivery";
+    }
+    else if(totalOrders >= 20){
+        text = "🥇 Gold: ₹50 Cashback";
+    }
+    else if(totalOrders >= 10){
+        text = "🥈 Silver: 3 Free Deliveries";
+    }
+    else{
+        text = `Complete ${10 - totalOrders} more orders to unlock reward`;
+    }
+
+    document.getElementById("rewardText").innerText = text;
+}
+
+// CLOSE
+
+// CLAIM REWARD
+function claimReward(){
+    let totalOrders = parseInt(localStorage.getItem("orders")) || 0;
+
+    if(totalOrders >= 30){
+        alert("🏆 Platinum Reward Claimed");
+        localStorage.setItem("orders", 0);
+    }
+    else if(totalOrders >= 20){
+        alert("🥇 Gold Reward Claimed");
+        localStorage.setItem("orders", 0);
+    }
+    else if(totalOrders >= 10){
+        alert("🥈 Silver Reward Claimed");
+        localStorage.setItem("orders", 0);
+    }
+    else{
+        alert("❌ Not enough orders");
+    }
+}
+function closeRewards(){
+    document.getElementById("rewardModal").style.display = "none";
+}
+document.getElementById("milkType").addEventListener("change",updateTotal);
+
+</script>
+
+</body>
+</html>

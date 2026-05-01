@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merchant Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Asha Dairy - Farmer Panel</div>
+    <form action="/loginsec/merchant.html">
+    <button class="logout-btn" type="submit">Logout</button>
+    </form>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero">
+      <h1>Welcome, Akshita <span aria-hidden="true">&#128075;</span></h1>
+      <p>Here is the overview of your dairy business.</p>
+    </section>
+
+    <section class="stats-grid">
+      <article class="stat-card">
+        <div class="stat-icon amber">&#128203;</div>
+        <div>
+          <p class="stat-label">Total Orders</p>
+          <h2>12</h2> 
+        </div>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-icon gold">&#8377;</div>
+        <div>
+          <p class="stat-label">Total Earnings</p>
+          <h2>&#8377;1,200</h2>
+        </div>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-icon blue">&#129371;</div>
+        <div>
+          <p class="stat-label">Milk Available</p>
+          <h2>25 Liters</h2>
+        </div>
+      </article>
+    </section>
+
+    <section class="quick-actions">
+      <button class="action-btn primary" type="button" data-action="add-farm">+ Add Farm</button>
+      <button class="action-btn" type="button" data-action="view-orders">Orders</button>
+      <button class="action-btn" type="button" data-action="view-earnings">Earnings</button>
+    </section>
+
+    <section class="content-grid">
+      <div class="panel farms-panel">
+        <div class="panel-header">
+          <h3>My Farms <span aria-hidden="true">&#128104;&#8205;&#127806;</span></h3>
+          <button class="mini-btn" type="button" data-action="add-farm">+ Add Farm</button>
+        </div>
+
+        <div class="farm-grid">
+          <article class="farm-card">
+            <img src="farmimg1.jpg" alt="Green Valley Farm">
+            <div class="farm-body">
+              <h4>Green Valley Farm</h4>
+              <p><strong>Milk Type:</strong> Cow Milk</p>
+              <p><strong>Price:</strong> &#8377;50/L</p>
+              <div class="farm-footer">
+                <span><strong>Location:</strong> Village Rampur</span>
+                <button class="manage-btn" type="button" data-action="manage-farm">Manage</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="farm-card">
+            <img src="farmimg2.jpg" alt="Fresh Dairy Farm">
+            <div class="farm-body">
+              <h4>Fresh Dairy Farm</h4>
+              <p><strong>Milk Type:</strong> Buffalo Milk</p>
+              <p><strong>Price:</strong> &#8377;60/L</p>
+              <div class="farm-footer">
+                <span><strong>Location:</strong> Chandausi</span>
+                <button class="manage-btn" type="button" data-action="manage-farm">Manage</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <aside class="panel orders-panel">
+        <div class="panel-header">
+          <h3>Recent Orders <span aria-hidden="true">&#128230;</span></h3>
+        </div>
+
+        <div class="order-list">
+          <article class="order-item">
+            <div>
+              <h4>Rohan</h4>
+              <p>Cow Milk - 3L</p>
+            </div>
+            <span class="status pending">Pending</span>
+          </article>
+
+          <article class="order-item">
+            <div>
+              <h4>Anjali</h4>
+              <p>Buffalo Milk - 2L</p>
+            </div>
+            <span class="status accepted">Accepted</span>
+          </article>
+
+          <article class="order-item">
+            <div>
+              <h4>Vikas</h4>
+              <p>Cow Milk - 1L</p>
+            </div>
+            <span class="status accepted">Accepted</span>
+          </article>
+        </div>
+
+        <button class="view-all" type="button" data-action="view-orders">View All</button>
+      </aside>
+    </section>
+  </main>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

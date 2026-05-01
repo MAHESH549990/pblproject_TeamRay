@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Earnings</title>
+    <link rel="stylesheet" href="earning.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Asha Dairy - Farmer Panel</h2>
+        <form action="/merchentminiproject/dashboard/dashboard.html">
+        <button class="box">Dashboard</button>
+    </form>
+
+    <form action="/merchentinventry/inventry2.html">
+        <button class="box">Inventory</button>
+    </form>
+
+    <form action="/merchentorder/order.html">
+        <button class="box">Orders</button>
+    </form>
+
+    <form action="/Earning/earn.html">
+        <button class="box">Earnings</button>
+    </form>
+    
+        <div class="support">Contact Support</div>
+    </div>
+
+    <!-- Main -->
+    <div class="main">
+
+        <div class="topbar">
+            <button class="logout">Logout</button>
+        </div>
+
+        <div class="content">
+
+            <h2 class="title-box">View Earnings ₹</h2>
+            <p>Here you can track your earnings and payment history.</p>
+
+            <!-- Cards -->
+            <div class="cards">
+                <div class="card">
+                    <p>Total Earnings</p>
+                    <h3>₹6,200</h3>
+                </div>
+
+                <div class="card">
+                    <p>Pending Payments</p>
+                    <h3>₹600</h3>
+                </div>
+
+                <div class="card">
+                    <p>Completed Payments</p>
+                    <h3>₹5,600</h3>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters">
+                <select>
+                    <option>This Month</option>
+                </select>
+
+                <select>
+                    <option>Sort by: Newest</option>
+                </select>
+
+                <button class="payment">Request Payment</button>
+            </div>
+
+            <!-- Table -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Customer</th>
+                        <th>Quantity</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="earningsTable"></tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<script src="earn.js"></script>
+</body>
+</html>

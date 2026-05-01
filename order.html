@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Orders</title>
+    <link rel="stylesheet" href="order.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+    <h2>Asha Dairy - Farmer Panel</h2>
+
+    <form action="/merchentminiproject/dashboard/dashboard.html">
+        <button class="box">Dashboard</button>
+    </form>
+
+    <form action="/merchentinventry/inventry2.html">
+        <button class="box">Inventory</button>
+    </form>
+
+    <form action="/merchentorder/order.html">
+        <button class="box">Orders</button>
+    </form>
+
+    <form action="/Earning/earn.html">
+        <button class="box">Earnings</button>
+    </form>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <div class="support">Contact Support</div>
+</div>
+
+    <!-- Main Content -->
+    <div class="main">
+
+        <div class="topbar">
+            <button class="logout">Logout</button>
+        </div>
+
+        <div class="content">
+            <h2 style="color: black;">&nbsp;&nbsp;&nbsp;Manage Orders 📦</h2>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Here you can manage all your incoming milk orders.</p>
+
+        <div class="filters">
+
+    <!-- Top row -->
+        <div class="top-filters">
+            <span class="pending">Pending (3)</span>
+            <span class="accepted">Accepted (21)</span>
+        </div>
+    
+
+    <!-- Bottom row -->
+        <div class="bottom-filters">
+                <input type="text" placeholder="Search...">
+
+                    <select>
+                        <option>All Farms</option>
+                    </select>
+
+                    <select>
+                        <option>Sort by: Newest</option>
+                    </select>
+
+                    <button class="payment">Request Payment</button>
+                </div>
+
+        </div>
+
+            <!-- Table -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Milk Type</th>
+                        <th>Quantity</th>
+                        <th>Total Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="ordersTable">
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<script src="order.js"></script>
+</body>
+</html>

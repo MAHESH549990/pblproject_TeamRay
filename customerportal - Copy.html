@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aasapure Dashboard</title>
+<link rel="stylesheet" href="customerportal.css">
+</head>
+<body>
+
+<div class="navbar">
+    <h2>AASAPURE</h2>
+    <div>
+        <a href="#">Home</a>
+        <a href="#">Orders</a>
+        <a href="#">Profile</a>
+    </div>
+</div>
+
+<div class="main">
+
+<div class="sidebar">
+    <li>Dashboard</li>
+    <li onclick="openModal()">Order Milk</li>
+    <li>Subscription</li>
+    <li>Rewards</li>
+    <li onclick="openCart()">Cart 🛒</li>
+</div>
+
+<div class="content">
+
+<div class="card">
+    <h2>Welcome, Mahesh 👋</h2>
+    <p>Order fresh milk anytime</p>
+</div>
+
+<div class="grid">
+
+<div class="card">
+    <h3>Order Milk</h3>
+    <p>Place new order</p>
+    <button onclick="openModal()">Order Now</button>
+</div>
+
+<div class="card">
+    <h3>Subscription</h3>
+    <p>Daily delivery setup</p>
+    <button>Manage</button>
+</div>
+
+<div class="card">
+    <h3>Track</h3>
+    <p>Track delivery</p>
+    <button>Track</button>
+</div>
+
+<div class="card">
+    <h3>Rewards</h3>
+    <p>Your benefits</p>
+    <button>View</button>
+</div>
+
+</div>
+
+</div>
+</div>
+
+<!-- ORDER MODAL -->
+<div id="modal" class="modal">
+<div class="modal-content">
+
+<span class="close" onclick="closeModal()">&times;</span>
+
+<h3>Select Farm</h3>
+<select id="farm">
+    <option>Sharma Dairy</option>
+    <option>Verma Farm</option>
+    <option>Organic Milk Farm</option>
+</select>
+
+<h3>Order Milk</h3>
+
+<label>Milk Type</label>
+<select id="milkType">
+    <option value="50">Cow Milk (₹50/L)</option>
+    <option value="60">Buffalo Milk (₹60/L)</option>
+</select>
+
+<label>Quantity (Litres)</label>
+<div class="qty-box">
+    <button onclick="decrease()">-</button>
+    <input type="number" id="qty" value="1">
+    <button onclick="increase()">+</button>
+</div>
+
+<label>Payment</label>
+<select>
+    <option>UPI</option>
+    <option>Card</option>
+    <option>Cash</option>
+</select>
+
+<div class="total">Total: ₹<span id="total">50</span></div>
+
+<button onclick="placeOrder()">Place Order</button>
+<button onclick="addToCart()">Add to Cart</button>
+
+</div>
+</div>
+
+<!-- CART MODAL -->
+<div id="cartModal" class="modal">
+<div class="modal-content">
+
+<span class="close" onclick="closeCart()">&times;</span>
+<h3>Your Cart 🛒</h3>
+
+<table border="1" style="width:100%; border-collapse:collapse; text-align:center;">
+    <thead>
+        <tr style="background:#2c3e50;color:white;">
+            <th>Farm</th>
+            <th>Milk</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="cartItems"></tbody>
+</table>
+
+</div>
+</div>
+
+<script>
+
+let cart = [];
+
+function openModal(){
+    document.getElementById("modal").style.display="flex";
+}
+
+function closeModal(){
+    document.getElementById("modal").style.display="none";
+}
+
+function openCart(){
+    document.getElementById("cartModal").style.display="flex";
+    renderCart();
+}
+
+function closeCart(){
+    document.getElementById("cartModal").style.display="none";
+}
+
+function increase(){
+    let qty=document.getElementById("qty");
+    qty.value=parseInt(qty.value)+1;
+    updateTotal();
+}
+
+function decrease(){
+    let qty=document.getElementById("qty");
+    if(qty.value>1){
+        qty.value=parseInt(qty.value)-1;
+    }
+    updateTotal();
+}
+
+function updateTotal(){
+    let price=document.getElementById("milkType").value;
+    let qty=document.getElementById("qty").value;
+    document.getElementById("total").innerText=price*qty;
+}
+
+function placeOrder(){
+    alert("Order Placed Successfully! 🚀");
+}
+
+function addToCart(){
+    let farm = document.getElementById("farm").value;
+    let milk = document.getElementById("milkType").options[document.getElementById("milkType").selectedIndex].text;
+    let qty = document.getElementById("qty").value;
+    let total = document.getElementById("total").innerText;
+
+    cart.push({farm, milk, qty, total});
+    alert("Added to Cart ✅");
+}
+
+/* 🔥 UPDATED CART FUNCTION */
+function renderCart(){
+    let table = document.getElementById("cartItems");
+    table.innerHTML = "";
+
+    cart.forEach((item, index) => {
+        let row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${item.farm}</td>
+            <td>${item.milk}</td>
+            <td>${item.qty} L</td>
+            <td>₹${item.total}</td>
+            <td>
+                <button onclick="placeSingleOrder(${index})"
+                    style="background:#27ae60;color:white;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;">
+                    Place
+                </button>
+                <button onclick="removeItem(${index})"
+                    style="background:red;color:white;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;">
+                    Remove
+                </button>
+            </td>
+        `;
+
+        table.appendChild(row);
+    });
+}
+/* 🔥 NEW FUNCTIONS */
+function removeItem(index){
+    let item = cart[index];
+
+    let confirmDelete = confirm(`Remove this item?\n${item.farm} - ${item.milk}`);
+
+    if(confirmDelete){
+        alert("Item Removed ❌");
+        cart.splice(index, 1);
+        renderCart();
+    }
+}
+
+
+function placeSingleOrder(index){
+    let item = cart[index];
+
+    let confirmOrder = confirm(`Do you want to place this order?\n${item.farm} - ${item.milk} - ${item.qty}L`);
+
+    if(confirmOrder){
+        alert(`Order Placed: ${item.farm} 🚀`);
+        cart.splice(index, 1);
+        renderCart();
+    }
+}
+
+document.getElementById("milkType").addEventListener("change",updateTotal);
+
+</script>
+
+</body>
+</html>

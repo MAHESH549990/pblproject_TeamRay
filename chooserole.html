@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choose Role - Aasapure</title>
+<link rel="stylesheet" href="chooserole.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Aasapure</h1>
+    <p>Select your role</p>
+
+    <div class="buttons">
+
+        <button onclick="goTo('customer.html')" class="btn customer">
+            Login as Customer
+        </button>
+
+        <button onclick="goTo('merchant.html')" class="btn merchant">
+            Login as Merchant
+        </button>
+
+        <button onclick="goTo('delivery.html')" class="btn delivery">
+            Login as Delivery
+        </button>
+
+    </div>
+</div>
+
+<script>
+function goTo(page){
+    window.location.href = page;
+}
+</script>
+
+</body>
+</html>

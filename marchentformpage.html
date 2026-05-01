@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Farm Registration</title>
+  <link rel="stylesheet" href="formfarmer.css">
+</head>
+<body>
+<form id="farmForm">
+  <div class="container">
+
+    <h2 class="title">Step up your dairy business by registering your farm</h2>
+
+    <!-- Farm Info -->
+    <div class="card">
+      <h3>🌱 Farm Information</h3>
+      <div class="grid-2">
+        <input type="text" placeholder="Enter farm name"  required>
+        <input type="text" placeholder="Village & District / Address"  required>
+        <select  required>
+          <option>Select state</option>
+          <option value="Uttar Pradesh">Uttar Pradesh</option>
+          <option value="Rajasthan">Rajasthan</option>
+          <option value="Madhya Pradesh">Madhya Pradesh</option>
+          <option value="Gujarat">Gujarat</option>
+          <option value="Andhra Pradesh">Andhra Pradesh</option>
+          <option value="Uttarakhand">Uttarakhand</option>
+          <option value="Bihar">Bihar</option>
+          <option value="Maharashtra">Maharashtra</option>
+          <option value="Hrayana">Hrayana</option>
+          <option value="Punjab">Punjab</option>
+        </select>
+        <input type="text" placeholder="Optional detailed address">
+      </div>
+      <input type="text" placeholder="GPS Location (optional)">
+    </div>
+
+    <!-- Milk Production -->
+    <div class="card">
+      <h3>🥛 Milk & Production</h3>
+
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="milk"> Cow Milk</label>
+        <label><input type="checkbox" name="milk"> Buffalo Milk</label>
+        <label><input type="checkbox" name="milk"> Mixed</label>
+      </div>
+
+      <input type="number" placeholder="Daily production (liters) "  required>
+
+      <div class="grid-2">
+        <input type="number" placeholder="Number of cows" required>
+        <input type="number" placeholder="Number of buffaloes" required>
+      </div>
+
+    </div>
+
+    <!-- Pricing -->
+    <div class="card">
+      <h3>💰 Pricing & Delivery</h3>
+
+      <div class="price-container">
+        <!-- Cow Milk Price -->
+        <div class="price-box" id="cowPrice">
+          <label>🐄 Cow Milk Price (₹/L)</label>
+          <input type="number" placeholder="Enter cow milk price">
+        </div>
+
+        <!-- Buffalo Milk Price -->
+        <div class="price-box" id="buffaloPrice">
+          <label>🐃 Buffalo Milk Price (₹/L)</label>
+          <input type="number" placeholder="Enter buffalo milk price">
+        </div>
+
+      </div>
+
+      <select>
+        <option>Delivery Available?</option>
+        <option>Yes</option>
+        <option>No</option>
+      </select>
+
+      <input type="number" placeholder="Minimum liters per order">
+
+      <select>
+        <option>Payment Mode</option>
+        <option>Cash</option>
+        <option>UPI</option>
+        <option>Online</option>
+      </select>
+    </div>
+
+    <!-- Quality -->
+    <div class="card">
+      <h3>Quality & Storage</h3>
+
+      <div class="radio-group">
+        <label><input type="radio" name="quality"> Organic</label>
+        <label><input type="radio" name="quality"> Regular</label>
+      </div>
+
+      <div class="radio-group">
+        <label><input type="radio" name="storage"> Refrigerated</label>
+        <label><input type="radio" name="storage"> Normal</label>
+      </div>
+
+      <div class="checkbox-group">
+        <label><input type="checkbox"> Basic</label>
+        <label><input type="checkbox"> Clean</label>
+        <label><input type="checkbox"> Certified</label>
+      </div>
+      <div class="ph-container">
+
+    <!-- Cow Milk pH -->
+    <div class="ph-box">
+      <label>🐄 Cow Milk pH</label>
+      <input type="number" id="cowPh" step="0.1" placeholder="e.g. 6.5">
+      <small>Normal: 6.4 - 6.7</small>
+    </div>
+
+    <!-- Buffalo Milk pH -->
+    <div class="ph-box">
+      <label>🐃 Buffalo Milk pH</label>
+      <input type="number" id="buffaloPh" step="0.1" placeholder="e.g. 6.8">
+      <small>Normal: 6.7 - 6.8</small>
+    </div>
+
+  </div>
+      <input type="text" placeholder="FSSAI Number (optional)">
+    </div>
+
+    <!-- Upload -->
+    <div class="card">
+      <h3>📷 Farm Images & Documents</h3>
+
+      <div class="upload-box">
+        <p>Upload Farm Image</p>
+        <input type="file">
+      </div>
+
+      <div class="upload-box">
+        <p>Upload Documents (Aadhar, PAN)</p>
+        <input type="file">
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <button type="button" class="clear-btn">Clear Form</button>
+      <button type="submit" class="submit-btn">Submit</button>
+    </div>
+
+  </div>
+  </body>
+</form>
+  <script src="formfarmer.js"></script>
+</body>
+</html>

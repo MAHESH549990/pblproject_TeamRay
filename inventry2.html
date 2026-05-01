@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Inventory</title>
+  <link rel="stylesheet" href="inventery2.css">
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <h2>Asha Dairy - Farmer Panel</h2>
+  <button class="logout">Logout</button>
+</div>
+
+<div class="container">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <form action="/merchentminiproject/dashboard/dashboard.html">
+        <button class="box">Dashboard</button>
+    </form>
+
+    <form action="/merchentinventry/inventry2.html">
+        <button class="box">Inventory</button>
+    </form>
+
+    <form action="/merchentorder/order.html">
+        <button class="box">Orders</button>
+    </form>
+
+    <form action="/Earning/earn.html">
+        <button class="box">Earnings</button>
+    </form>
+
+    <div class="support">Contact Support</div>
+</div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div>
+        <p class="breadcrumb">Inventory / Manage Farms</p><br/>
+        <h1>Manage Inventory </h1><br/>
+        <p class="subtext">Here you can manage your milk inventory and farm details.</p>
+      </div>
+      <form action="/formofmerchent/marchentformpage.html">
+      <button class="add-btn" value="submit">+ Add Farm</button>
+      </form>
+    </div>
+
+    <hr>
+
+    <!-- STATS -->
+    <div class="stats">
+
+  <div class="card">
+    <p class="card-title">Daily Milk Stock</p>
+    <h3>55 Liters</h3>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Total Farms</p>
+    <h3>3</h3>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Total Earnings</p>
+    <h3>₹2750</h3>
+  </div>
+
+</div>
+    <!-- FILTER -->
+    <div class="filter-box">
+      <input type="text" placeholder="Search...">
+      <select><option>All Farms</option></select>
+      <select><option>Newest</option></select>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-box">
+      <table>
+        <tr>
+          <th>Farm</th>
+          <th>Milk Type</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Action</th>
+        </tr>
+
+        <tr>
+          <td>Green Valley Farm</td>
+          <td>Cow Milk</td>
+          <td>20 Liters</td>
+          <td>₹50</td>
+          <td>
+            <button class="edit">Edit</button>
+            <button class="delete">Delete</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Fresh Dairy Farm</td>
+          <td>Buffalo Milk</td>
+          <td>25 Liters</td>
+          <td>₹60</td>
+          <td>
+            <button class="edit">Edit</button>
+            <button class="delete">Delete</button>
+          </td>
+        </tr>
+
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
